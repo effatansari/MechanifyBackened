@@ -3,12 +3,12 @@ const router = express.Router();
 const {signUp,login,getUser,updateUser,updatePassword,deleteUser, changePassword} = require('../controllers/userController');
 const {verifyToken, verifyTokenForAdmin} = require("../middlewares/jwt");
 const { getMechanics } = require('../controllers/mechanicController');
-const {sendOtp,verifyOtp} = require('../controllers/otpController');
+// const {sendOtp,verifyOtp} = require('../controllers/otpController');
 const { getAllUsersByAdmin,getUserByAdmin, addUserByAdmin, updateUserByAdmin, deleteUserByAdmin } = require('../controllers/adminController');
 const {createDeviceToken} = require('../controllers/pushNotificationController')
 
-router.post("/sendOtp",sendOtp);
-router.post("/verifyOtp",verifyOtp);
+// router.post("/sendOtp",sendOtp);
+// router.post("/verifyOtp",verifyOtp);
 router.post("/signup",signUp);
 router.post("/login",login);
 router.get("/getuser/:id",verifyToken,getUser);

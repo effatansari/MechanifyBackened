@@ -5,16 +5,16 @@ const Request = require("../schemas/requestSchema");
 const bcrypt = require("bcrypt");
 const {generateToken, verifyToken} = require("../middlewares/jwt");
 const _ = require("lodash");
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2;
 
 
 
 // Configure Cloudinary
-cloudinary.config({
-  cloud_name: 'dmv6xucum',
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret
-});
+// cloudinary.config({
+//   cloud_name: 'dmv6xucum',
+//   api_key: process.env.api_key,
+//   api_secret: process.env.api_secret
+// });
 
 
 exports.signUp=asyncHandler(async(req,res)=>{
@@ -126,27 +126,27 @@ exports.getUser = asyncHandler(async (req, res) => {
 
 exports.updateUser = asyncHandler(async (req, res) => {
    
-   const { username, latitude, longitude,services,role,phoneNum,appointment_date_time } = req.body;
+   const { username, latitude, longitude,services,role,phoneNum,appointment_date_time,image } = req.body;
    // If fields are missing
   //  if (!username) {
   //    res.status(400)
   //    throw new Error( "Required fields are missing");
   //  }
-  const imageData = req.body.image;
+  // const imageData = req.body.image;
 
-  // Upload image to Cloudinary
-  const img = await cloudinary.uploader.upload(imageData, {
-    resource_type: 'image'
-  });  
-   if(!img){
+  // // Upload image to Cloudinary
+  // const img = await cloudinary.uploader.upload(imageData, {
+  //   resource_type: 'image'
+  // });  
+  //  if(!img){
 
-       res.status(400)
-       throw new Error( "Image not uploaded")
-   }
+  //      res.status(400)
+  //      throw new Error( "Image not uploaded")
+  //  }
   
 
    //update User
-   const user = await userModel.findByIdAndUpdate(req.userId,{username, latitude, longitude,services,role,phoneNum,appointment_date_time,image:img.secure_url},{new:true});
+   const user = await userModel.findByIdAndUpdate(req.userId,{username, latitude, longitude,services,role,phoneNum,appointment_date_time,image},{new:true});
    if (!user) {
      res.status(400)
      throw new Error( "User not found") ;
